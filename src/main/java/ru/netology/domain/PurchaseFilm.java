@@ -15,5 +15,4 @@ public class PurchaseFilm {
     private String productName;
     private int ticketPrice;
     private int duration;
-
 }

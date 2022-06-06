@@ -17,7 +17,7 @@ public class PosterManagerTest {
     PurchaseFilm five = new PurchaseFilm(5, 5, "Пятый", 300, 120);
     PurchaseFilm six = new PurchaseFilm(6, 6, "Шестой", 400, 180);
 
-//    @ParameterizedTest
+    //    @ParameterizedTest
 //    @CsvFileSource(resources = "/firstTest.csv")
     @Test
     void firstTest() {
@@ -32,10 +32,39 @@ public class PosterManagerTest {
         manager.findAll();
         manager.findLast();
 
-        PurchaseFilm[] actual = manager.findAll();
-        PurchaseFilm[] expected = { first, second, third, four, five, six };
+        PurchaseFilm[] actual = manager.findLast();
+        PurchaseFilm[] expected = {six, five, four, third, second};
 
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    @Test
+    void secondTest() {
+        PosterManager manager = new PosterManager();
+        manager.add(first);
+        manager.add(second);
+        manager.add(third);
+        manager.add(four);
+        manager.add(five);
+        manager.add(six);
+        manager.findAll();
+
+        PurchaseFilm[] actual = manager.findAll();
+        PurchaseFilm[] expected = {first, second, third, four, five, six};
+        Assertions.assertArrayEquals(expected, actual);
+
+        PosterManager manager1 = new PosterManager();
+        manager1.add(first);
+        manager1.add(second);
+        manager1.add(third);
+        manager1.add(four);
+        manager1.add(five);
+        manager1.add(six);
+        manager1.findLast();
+
+        PurchaseFilm[] actual1 = manager1.findLast();
+        PurchaseFilm[] expected1 = {six, five, four, third, second, first};
+        Assertions.assertArrayEquals(expected1, actual1);
+
+    }
 }

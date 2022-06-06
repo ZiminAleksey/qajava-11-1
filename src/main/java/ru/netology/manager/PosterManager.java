@@ -5,12 +5,14 @@ import ru.netology.domain.PurchaseFilm;
 public class PosterManager {
     private PurchaseFilm[] films = new PurchaseFilm[0];
     private int resultLength = 10;
+
     public PosterManager() {
     }
 
-    public PosterManager (int resultLength) {
+    public PosterManager(int resultLength) {
         this.resultLength = resultLength;
     }
+
     public void add(PurchaseFilm film) {
         int length = films.length + 1;
         PurchaseFilm[] tmp = new PurchaseFilm[length];
@@ -20,15 +22,14 @@ public class PosterManager {
         films = tmp;
     }
 
-    public PurchaseFilm[] findAll () {
+    public PurchaseFilm[] findAll() {
         return films;
     }
 
-    public PurchaseFilm[] findLast () {
+    public PurchaseFilm[] findLast() {
         if (films.length > resultLength) {
             resultLength = resultLength;
-        }
-        else {
+        } else {
             resultLength = films.length;
         }
         PurchaseFilm[] result = new PurchaseFilm[resultLength];
@@ -38,8 +39,6 @@ public class PosterManager {
         }
         return result;
     }
-
-
 
 
 }
