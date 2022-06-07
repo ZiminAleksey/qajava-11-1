@@ -1,32 +1,35 @@
 package ru.netology.manager;
 
 import ru.netology.domain.PurchaseFilm;
+import ru.netology.repository.FilmRepository;
 
 public class PosterManager {
-    private PurchaseFilm[] films = new PurchaseFilm[0];
+
+    private FilmRepository repository;
+
+
     private int resultLength = 10;
 
-    public PosterManager() {
+    public PosterManager(FilmRepository repository) {
+        this.repository = repository;
     }
 
-    public PosterManager(int resultLength) {
+    public PosterManager(int resultLength, FilmRepository repository) {
         this.resultLength = resultLength;
+        this.repository = repository;
     }
 
     public void add(PurchaseFilm film) {
-        int length = films.length + 1;
-        PurchaseFilm[] tmp = new PurchaseFilm[length];
-        System.arraycopy(films, 0, tmp, 0, films.length);
-        int lastIndex = tmp.length - 1;
-        tmp[lastIndex] = film;
-        films = tmp;
+        repository.save(film);
     }
 
     public PurchaseFilm[] findAll() {
+        PurchaseFilm[] films = repository.findAll();
         return films;
     }
 
     public PurchaseFilm[] findLast() {
+        PurchaseFilm[] films = repository.findAll();
         if (films.length > resultLength) {
             resultLength = resultLength;
         } else {
@@ -39,6 +42,4 @@ public class PosterManager {
         }
         return result;
     }
-
-
 }
