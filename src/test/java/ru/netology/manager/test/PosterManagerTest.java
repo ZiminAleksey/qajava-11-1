@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import ru.netology.domain.PurchaseFilm;
 import ru.netology.manager.PosterManager;
+import ru.netology.repository.FilmRepository;
 
 import java.util.Arrays;
 
@@ -17,12 +18,12 @@ public class PosterManagerTest {
     PurchaseFilm five = new PurchaseFilm(5, 5, "Пятый", 300, 120);
     PurchaseFilm six = new PurchaseFilm(6, 6, "Шестой", 400, 180);
 
-    //    @ParameterizedTest
-//    @CsvFileSource(resources = "/firstTest.csv")
+
     @Test
     void firstTest() {
 
-        PosterManager manager = new PosterManager(5);
+        FilmRepository repo = new FilmRepository();
+        PosterManager manager = new PosterManager(5, (repo));
         manager.add(first);
         manager.add(second);
         manager.add(third);
@@ -40,7 +41,8 @@ public class PosterManagerTest {
 
     @Test
     void secondTest() {
-        PosterManager manager = new PosterManager();
+        FilmRepository repo = new FilmRepository();
+        PosterManager manager = new PosterManager(repo);
         manager.add(first);
         manager.add(second);
         manager.add(third);
@@ -53,7 +55,8 @@ public class PosterManagerTest {
         PurchaseFilm[] expected = {first, second, third, four, five, six};
         Assertions.assertArrayEquals(expected, actual);
 
-        PosterManager manager1 = new PosterManager();
+        FilmRepository repo1 = new FilmRepository();
+        PosterManager manager1 = new PosterManager(repo1);
         manager1.add(first);
         manager1.add(second);
         manager1.add(third);
@@ -65,6 +68,5 @@ public class PosterManagerTest {
         PurchaseFilm[] actual1 = manager1.findLast();
         PurchaseFilm[] expected1 = {six, five, four, third, second, first};
         Assertions.assertArrayEquals(expected1, actual1);
-
     }
 }
